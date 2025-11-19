@@ -9,14 +9,17 @@ const App=()=>{
     {
         fetch("http://localhost:5000/api/Unit/Generation",{method:"GET"}).then((response)=>response.json()).then((data)=>setUnits(data))
     };
+    const endTurn=()=>{
+        fetch("http://localhost:5000/api/Unit/EndTurn",{method:"Patch"});
+    }
     const loadUnits=()=>{
         fetch("http://localhost:5000/api/Unit/GetUnits",{method:"GET"}).then((response)=>response.json()).then((data)=>setUnits(data))
     };
     const unitClickHandler=(x:number,y:number)=>{
         fetch(`http://localhost:5000/api/Unit/GetHexesForUnit/?x=${x}&y=${y}`).then((response)=>response.json()).then((data)=>setHexesForUnit(data))
     }
-    const hexClickHandler=async(x:number,y:number)=>{
-        await fetch(`http://localhost:5000/api/Unit/MoveUnitTo/?x=${x}&y=${y}`,{method:"PATCH"})
+    const hexClickHandler=async(x:number,y:number,movesToReach:number)=>{
+        await fetch(`http://localhost:5000/api/Unit/MoveUnitTo/?x=${x}&y=${y}&movesToReach=${movesToReach}`,{method:"PATCH"})
         await loadUnits();
         unitClickHandler(x,y);
     }
@@ -26,6 +29,7 @@ const App=()=>{
         <div className="App">
             <button onClick={generateUnits}>Generate units</button>
             <button onClick={loadUnits}>Load units</button>
+            <button onClick={endTurn}>End turn</button>
         <h1>Супер пупер игра</h1>
         <div>
         <UnitsMap units={units} UnitClickHandler={unitClickHandler}/>

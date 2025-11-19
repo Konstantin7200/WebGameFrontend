@@ -6,7 +6,7 @@ interface HexMapProps{
     size?:number,
     hexSize?:number
     hexesForUnit:any
-    onHexClick:(x:number,y:number)=>void
+    onHexClick:(x:number,y:number,movesToReach:number)=>void
 }
 
 
@@ -18,13 +18,12 @@ const HexMap:FC<HexMapProps>=({size=7,hexSize=60,hexesForUnit,onHexClick})=>{
 
     const mapWidth:number=size*hexWidth;
     const mapHeight:number=(size-1)*rowHeight+rowHeight*2;
-    const hexesForUnitSet=new Set();
+    const hexesForUnitMap=new Map();
     if(hexesForUnit!=null)
     for(let i=0;i<hexesForUnit.length;i++)
     {
-        hexesForUnitSet.add((`${hexesForUnit[i].x},${hexesForUnit[i].y}`))
+        hexesForUnitMap.set((`${hexesForUnit[i].x},${hexesForUnit[i].y}`),hexesForUnit[i].moves)
     }
-    
 
     const style={
         height:`${mapHeight}px`,
@@ -37,7 +36,7 @@ const HexMap:FC<HexMapProps>=({size=7,hexSize=60,hexesForUnit,onHexClick})=>{
         offset=i%2==0?0:-hexWidth/2;
         for(let j=0;j<columns;j++)
         {
-            hexElements.push(<Hex key={`${j}-${i}`} isForUnit={hexesForUnitSet.has(`${j},${i}`)} centerX={j*hexWidth+offset} centerY={i*rowHeight} size={hexSize} x={j} y={i} onHexClick={onHexClick}/>)
+            hexElements.push(<Hex key={`${j}-${i}`} isForUnit={hexesForUnitMap.has(`${j},${i}`)} centerX={j*hexWidth+offset} centerY={i*rowHeight} size={hexSize} x={j} y={i} movesToReach={hexesForUnitMap.get(`${j},${i}`)} onHexClick={onHexClick}/>)
         }
     }
     return (
