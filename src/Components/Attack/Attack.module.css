@@ -1,0 +1,12 @@
+.Attack {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  border: 1px solid aliceblue;
+  background-color: black;
+  gap: 0.5rem;
+}
+.Attack > div {
+  background-color: aliceblue;
+  color: black;
+}

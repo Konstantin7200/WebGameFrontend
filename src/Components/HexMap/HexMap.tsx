@@ -6,9 +6,8 @@ interface HexMapProps{
     size?:number,
     hexSize?:number
     hexesForUnit:any
-    onHexClick:(x:number,y:number,movesToReach:number)=>void
+    onHexClick:(x:number,y:number,movesToReach:number,isForUnit:boolean,isEnemies:boolean,prev:any)=>void
 }
-
 
 const HexMap:FC<HexMapProps>=({size=7,hexSize=60,hexesForUnit,onHexClick})=>{
     const hexElements=[];
@@ -19,12 +18,20 @@ const HexMap:FC<HexMapProps>=({size=7,hexSize=60,hexesForUnit,onHexClick})=>{
     const mapWidth:number=size*hexWidth;
     const mapHeight:number=(size-1)*rowHeight+rowHeight*2;
     const hexesForUnitMap=new Map();
+    const enemiesHexesMap=new Map();
     if(hexesForUnit!=null)
-    for(let i=0;i<hexesForUnit.length;i++)
     {
-        hexesForUnitMap.set((`${hexesForUnit[i].x},${hexesForUnit[i].y}`),hexesForUnit[i].moves)
+    const freeHexes=hexesForUnit.hexes;
+    const enemiesHexes=hexesForUnit.enemiesHexes;
+    for(let i=0;i<freeHexes.length;i++)
+    {
+        hexesForUnitMap.set((`${freeHexes[i].x},${freeHexes[i].y}`),freeHexes[i].moves)
     }
-
+    for(let i=0;i<enemiesHexes.length;i++)
+    {
+        enemiesHexesMap.set(`${enemiesHexes[i].x},${enemiesHexes[i].y}`,enemiesHexes[i].previous);
+    }
+    }
     const style={
         height:`${mapHeight}px`,
         width:`${mapWidth}px`
@@ -36,7 +43,7 @@ const HexMap:FC<HexMapProps>=({size=7,hexSize=60,hexesForUnit,onHexClick})=>{
         offset=i%2==0?0:-hexWidth/2;
         for(let j=0;j<columns;j++)
         {
-            hexElements.push(<Hex key={`${j}-${i}`} isForUnit={hexesForUnitMap.has(`${j},${i}`)} centerX={j*hexWidth+offset} centerY={i*rowHeight} size={hexSize} x={j} y={i} movesToReach={hexesForUnitMap.get(`${j},${i}`)} onHexClick={onHexClick}/>)
+            hexElements.push(<Hex key={`${j}-${i}`} isForUnit={hexesForUnitMap.has(`${j},${i}`)} centerX={j*hexWidth+offset} centerY={i*rowHeight} size={hexSize} x={j} y={i} movesToReach={hexesForUnitMap.get(`${j},${i}`)} isEnemies={enemiesHexesMap.has(`${j},${i}`)} onHexClick={onHexClick} prev={enemiesHexesMap.get(`${j},${i}`)}/>)
         }
     }
     return (

@@ -7,9 +7,8 @@ const calculateWidthAndHeight=(size:number):[number,number]=>{
 //width=sqrt(3)*size
 //height=2*size
 
-const handleClick=(x:number,y:number,isForUnit:boolean,movesToReach:number,onHexClick:(x:number,y:number,movesToReach:number)=>void)=>{
-    if(isForUnit)
-        onHexClick(x,y,movesToReach);
+const handleClick=(x:number,y:number,isForUnit:boolean,movesToReach:number,isEnemies:boolean,onHexClick:(x:number,y:number,movesToReach:number,isForUnit:boolean,isEnemies:boolean,prev:any)=>void,prev:any)=>{
+    onHexClick(x,y,movesToReach,isForUnit,isEnemies,prev);
 }
 
 interface HexProps{
@@ -20,13 +19,16 @@ interface HexProps{
     y:number,
     movesToReach:number,
     isForUnit:boolean,
-    onHexClick:(x:number,y:number,movesToReach:number)=>void
+    isEnemies:boolean,
+    prev?:any,
+    onHexClick:(x:number,y:number,movesToReach:number,isForUnit:boolean,isEnemies:boolean,prev:any)=>void,
 }
 
 
-const Hex:FC<HexProps>=({size,centerX,centerY,x,isForUnit,y,onHexClick,movesToReach})=>{
+const Hex:FC<HexProps>=({size,centerX,centerY,x,isForUnit,y,onHexClick,movesToReach,isEnemies,prev})=>{
     const [width,height]=calculateWidthAndHeight(size);
     let color=isForUnit?'radial-gradient(burlywood,rgba(192, 222, 25, 1))':'radial-gradient(burlywood,rgb(230, 161, 71))'
+    color=isEnemies?'radial-gradient(burlywood,rgba(234, 17, 17, 1))':color;
     const style={
         width:`${width}px`,
         height:`${height}px`,
@@ -35,7 +37,7 @@ const Hex:FC<HexProps>=({size,centerX,centerY,x,isForUnit,y,onHexClick,movesToRe
         background:color
     }
     return(
-        <div style={style} onClick={()=>handleClick(x,y,isForUnit,movesToReach,onHexClick)} className={st.Hex}>{`${x}-${y}`}</div>
+        <div style={style} onClick={()=>handleClick(x,y,isForUnit,movesToReach,isEnemies,onHexClick,prev)} className={st.Hex}>{`${x}-${y}`}</div>
     )
 }
 

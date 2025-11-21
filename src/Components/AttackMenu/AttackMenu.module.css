@@ -1,0 +1,16 @@
+.AttackMenu {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  color: aliceblue;
+  background-color: black;
+  position: absolute;
+  top:40vh;
+  z-index: 3;
+}
+
+.AttackMenu>div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
