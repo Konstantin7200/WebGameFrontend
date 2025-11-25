@@ -1,12 +1,25 @@
 .Attack {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   flex-direction: row;
   border: 1px solid aliceblue;
-  background-color: black;
   gap: 0.5rem;
+  width:13rem;
+  padding: 1rem 4rem;
 }
 .Attack > div {
-  background-color: aliceblue;
-  color: black;
+  color: aliceblue;
+}
+.ImageCont {
+  width: 4rem;
+  height: 4rem;
+  background-color:black;
+  border: aliceblue 1px solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.ImageCont>img{
+  width: 3rem;
 }

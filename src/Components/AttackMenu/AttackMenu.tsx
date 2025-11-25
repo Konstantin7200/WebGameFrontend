@@ -17,7 +17,7 @@ const getAttacksOnType=(attacks1:any,attacks2:any,type:number)=>{
             mas1.push(<Attack key={"mas1"+i} attack={attacks1[i]}></Attack>);
     }
     if(mas1.length==0)
-        mas1.push(<Attack key={"mas1"+0} attack={fakeAttack}/>);
+        return null;
     for(let i=0;i<attacks2.length;i++)
     {
         if(attacks2[i].attackType===type)
@@ -35,18 +35,19 @@ export const AttackMenu:FC<AttackMenuProps>=({attacks1,attacks2,handleCLick})=>{
         return(
     <div></div>
     )
-    console.log(attacks1,attacks2)
-    const mas1=getAttacksOnType(attacks1,attacks2,0);
-    const mas2=getAttacksOnType(attacks1,attacks2,1);
+    const mas1=getAttacksOnType(attacks1,attacks2,1);
+    const mas2=getAttacksOnType(attacks1,attacks2,0);
     return (
         <div className={st.AttackMenu}>
             Attacks
+            {mas1!=null&&
             <div onClick={()=>handleCLick(mas1[0],mas1[1])}>
-                {mas1};
-            </div>
+                {mas1}
+            </div>}
+            {mas2!=null&&
             <div onClick={()=>handleCLick(mas2[0],mas2[1])}>
-                {mas2};
-            </div>
+                {mas2}
+            </div>}
         </div>
     )
 }

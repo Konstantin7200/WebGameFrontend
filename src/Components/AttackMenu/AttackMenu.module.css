@@ -1,16 +1,17 @@
 .AttackMenu {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 2rem;
   color: aliceblue;
-  background-color: black;
+  background:linear-gradient(rgb(62, 60, 71),rgb(47, 51, 48) 70%,rgb(35, 40, 42));/**/
   position: absolute;
-  top:40vh;
   z-index: 3;
+  padding: 3rem;
 }
 
 .AttackMenu>div{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    gap:5rem
 }
