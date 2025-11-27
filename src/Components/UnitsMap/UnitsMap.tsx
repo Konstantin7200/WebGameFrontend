@@ -27,7 +27,8 @@ export const UnitsMap:FC<UnitsMapProps>=({size=7,hexSize=60,units,UnitClickHandl
                 offset=0;
             else offset=-hexWidth/2;
             index++;
-            unitsMas.push(<Unit key={`${x}-${y}`} centerX={x*hexWidth+offset} centerY={y*rowHeight} type={units[i].baseUnit.type} x={x} y={y} UnitClickHandler={UnitClickHandler} side={units[i].side}></Unit>)
+
+            unitsMas.push(<Unit key={`${x}-${y}`} unit={units[i]} style={{left:x*hexWidth+offset+25+'px',top:y*rowHeight+20+'px'}} UnitClickHandler={UnitClickHandler} ></Unit>)
         }
     }
 

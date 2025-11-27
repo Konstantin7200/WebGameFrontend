@@ -1,8 +1,19 @@
-.Unit{
-    position: absolute;
+.Unit {
+  position: absolute;
 }
-.Unit>img{
-    width: 4rem;
-    background-repeat: no-repeat;
-    background-size: cover;
+.Unit > img {
+  width: 4rem;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.HpBarCont {
+  width: 3rem;
+  background-color: red;
+  height: 0.5rem;
+  margin-bottom:0.5rem ;
+}
+.HpBar {
+  background-color: rgb(118, 157, 39);
+  height: 100%;
 }

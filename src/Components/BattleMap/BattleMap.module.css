@@ -1,0 +1,11 @@
+.BattleMap {
+  text-align: center;
+  background-image:url("../../Assets/background/Cartoon_Medieval_Training\ Arena_Level_Set_Background\ -\ Layer\ 00.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: black;
+}
