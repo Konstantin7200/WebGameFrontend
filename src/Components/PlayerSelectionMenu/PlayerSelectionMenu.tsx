@@ -9,7 +9,7 @@ interface PlayerSelectionMenuProps{
 export const PlayerSelectionMenu:FC<PlayerSelectionMenuProps>=({onClickFunc})=>{
     const createNewConfig=()=>{
         const data={side1:sides[0]=="Player",side2:sides[1]=="Player"};
-        fetch("http://localhost:5000/api/Unit/CreateConfig",{method:"Post",body:JSON.stringify(data),headers:{'Content-Type': 'application/json'}});
+        fetch("http://localhost:5000/api/Game/CreateConfig",{method:"Post",body:JSON.stringify(data),headers:{'Content-Type': 'application/json'}});
     }
     const clickHandler=()=>{
         createNewConfig();

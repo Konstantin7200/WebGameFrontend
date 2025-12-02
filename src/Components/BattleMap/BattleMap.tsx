@@ -10,6 +10,8 @@ interface BattleMapProps{
 }
 
 
+
+
 export const BattleMap:FC<BattleMapProps>=({endGame,inGame})=>{
     const generateUnits=async()=>
     {
@@ -33,8 +35,8 @@ export const BattleMap:FC<BattleMapProps>=({endGame,inGame})=>{
     }
     const endTurn=async()=>{
         if(inGame){
-        await fetch("http://localhost:5000/api/Unit/EndTurn",{method:"Patch"});
-        await fetch("http://localhost:5000/api/Unit/GetNextTurn",{method:"Get"}).then((response)=>response.json()).then((data)=>{
+        await fetch("http://localhost:5000/api/Game/EndTurn",{method:"Patch"});
+        await fetch("http://localhost:5000/api/Game/GetNextTurn",{method:"Get"}).then((response)=>response.json()).then((data)=>{
             if(data)
                 makeAITurn();
         })
@@ -46,7 +48,7 @@ export const BattleMap:FC<BattleMapProps>=({endGame,inGame})=>{
         while(result&&inGame)
         {
         await new Promise(resolve=>setTimeout(resolve,500));
-        await fetch(`http://localhost:5000/api/Unit/AITurn`,{method:"Post"}).then((response)=>response.json()).then((data)=>result=data)
+        await fetch(`http://localhost:5000/api/Game/AITurn`,{method:"Post"}).then((response)=>response.json()).then((data)=>result=data)
         await loadUnits(); 
         checkIfLeadersAreDead();
         }
