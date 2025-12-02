@@ -19,6 +19,7 @@ export const UnitsMap:FC<UnitsMapProps>=({size=7,hexSize=60,units,UnitClickHandl
     
     if(units!=null)
     {
+        //console.log(units);
         for(let i=0;i<units.length;i++)
         {
             let x=units[i].x;

@@ -1,17 +1,22 @@
 import HexMap from "../../Components/HexMap/HexMap"
 import st from "./BattleMap.module.css"
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { UnitsMap } from "../../Components/UnitsMap/UnitsMap";
 import { AttackMenu } from "../../Components/AttackMenu/AttackMenu";
 
+interface BattleMapProps{
+    endGame:any,
+    inGame:boolean
+}
 
-export const BattleMap=()=>{
+
+export const BattleMap:FC<BattleMapProps>=({endGame,inGame})=>{
     const generateUnits=async()=>
     {
         await fetch("http://localhost:5000/api/Unit/Generation",{method:"POST"})
         loadUnits();
+        endTurn();
     };
-   
     const loadUnits=()=>{
         fetch("http://localhost:5000/api/Unit/GetUnits",{method:"GET"}).then((response)=>response.json()).then((data)=>setUnits(data))
     };
@@ -26,24 +31,27 @@ export const BattleMap=()=>{
             enemyClickHandler(x,y,prev);   
         }
     }
-     const endTurn=async()=>{
+    const endTurn=async()=>{
+        if(inGame){
         await fetch("http://localhost:5000/api/Unit/EndTurn",{method:"Patch"});
+        await fetch("http://localhost:5000/api/Unit/GetNextTurn",{method:"Get"}).then((response)=>response.json()).then((data)=>{
+            if(data)
+                makeAITurn();
+        })
     }
-    const endTurnAndStartAiTurn=async()=>{
-        await endTurn();
-        //await makeAITurn();
     }
     const makeAITurn=async ()=>{
         setDisabled(true);
         let result=true;
-        while(result)
+        while(result&&inGame)
         {
         await new Promise(resolve=>setTimeout(resolve,500));
         await fetch(`http://localhost:5000/api/Unit/AITurn`,{method:"Post"}).then((response)=>response.json()).then((data)=>result=data)
         await loadUnits(); 
-        }
         checkIfLeadersAreDead();
+        }
         endTurn();
+        
         setDisabled(false);
     }
     const freeHexClickHandler=async (x:number,y:number,movesToReach:number)=>{
@@ -79,24 +87,23 @@ export const BattleMap=()=>{
         unitClickHandler(selectedUnits[0].x,selectedUnits[0].y);
     }
     const checkIfLeadersAreDead=async()=>{
-        await fetch(`http://localhost:5000/api/Unit/IsLeaderDead`).then((response)=>{console.log(12);return response.json()}).then((data)=>{
+        await fetch(`http://localhost:5000/api/Unit/IsLeaderDead`).then((response)=>response.json()).then((data)=>{
             if(data===1)
-                alert("Right player won");
+                {
+                    alert("Right player won");
+                    inGame=false;
+                    endGame();
+                    
+                }
             if(data===-1)
+               { 
                 alert("Left player won");
+                inGame=false;
+                endGame();
+                
+            }
         })
     }
-    const startAiGame=async()=>{
-        
-        await generateUnits();
-        while(true){
-            await makeAITurn();
-            setDisabled(true);
-            await new Promise(resolve=>setTimeout(resolve,1000));
-        }
-    }
-    
-    
     const [selectedUnits,setSelectedUnits]=useState([{x:1,y:1},{x:1,y:1}])
     const [attacks,setAttacks]=useState([null,null]);
     const [units,setUnits]=useState(null);
@@ -105,16 +112,14 @@ export const BattleMap=()=>{
     const [disabled,setDisabled]=useState(false);
     return (
         <div className={st.BattleMap}>
-            <button onClick={generateUnits}>Generate units</button>
-            <button onClick={loadUnits}>Load units</button>
-            <button disabled={disabled} onClick={endTurnAndStartAiTurn}>End turn</button>
-            <button disabled={disabled} onClick={startAiGame}>Start AI Game</button>
+            <button disabled={disabled} onClick={endTurn}>End turn</button>
+            <button onClick={generateUnits}>Start game</button>
         <h1>Супер пупер игра</h1>
         <div>
         <UnitsMap units={units} UnitClickHandler={unitClickHandler}/>
         <HexMap hexesForUnit={hexesForUnit} onHexClick={hexClickHandler} />
         </div>
-        {attacksMas[0] !== null && attacksMas[1] !== null/*&&selectedUnits[0].x!=1*/&&<AttackMenu attacks1={attacksMas[0]} attacks2={attacksMas[1]} units={selectedUnits} handleCLick={handleAttackClick}/>}
+        {attacksMas[0] !== null && attacksMas[1] !== null&&<AttackMenu attacks1={attacksMas[0]} attacks2={attacksMas[1]} units={selectedUnits} handleCLick={handleAttackClick}/>}
         </div>
     )
 }

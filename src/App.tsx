@@ -2,16 +2,25 @@ import { useState } from "react"
 import "./App.css"
 import { BattleMap } from "./Components/BattleMap/BattleMap"
 import { MainMenu } from "./Components/MainMenu/MainMenu";
+import { PlayerSelectionMenu } from "./Components/PlayerSelectionMenu/PlayerSelectionMenu";
 
 const App=()=>{
     const startGame=()=>{
-        setInGame(true)
+        setInGame(2)
     }
-    const[inGame,setInGame]=useState(false);
+    const loadPlayerSelectionMenu=()=>{
+        setInGame(1);
+    }
+    const endGame=()=>{
+        setInGame(0);
+    }
+
+    const[inGame,setInGame]=useState(0);
     return(
         <div className="App">
-            {inGame&&<BattleMap/>}
-            {!inGame&&<MainMenu startGame={startGame}/>}
+            {inGame==2&&<BattleMap endGame={endGame} inGame={inGame==2}/>}
+            {inGame==0&&<MainMenu startGame={loadPlayerSelectionMenu}/>}
+            {inGame==1&&<PlayerSelectionMenu onClickFunc={startGame}/>}
         </div>
     )
 }

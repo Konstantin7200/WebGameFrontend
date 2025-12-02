@@ -1,0 +1,11 @@
+.PlayerSelectionMenu {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100vh;
+}
+.PlayerSelectionMenu > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}

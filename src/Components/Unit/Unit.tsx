@@ -12,12 +12,9 @@ interface UnitProps{
 const handleUnitClick=(x:number,y:number,UnitClickHandler:(x:number,y:number)=>void)=>{
     UnitClickHandler(x,y);
 }
+const UnitSprites=new Map([["Swordsman",Swordsman],["Lord",Lord],["Archer",Archer]]);
 const getUnitSprite=(type:string)=>{
-    if(type=="Swordsman")
-    return Swordsman;
-    if(type=="Archer")
-    return Archer;
-    return Lord;
+    return UnitSprites.get(type);
 }
 
 export const Unit:FC<UnitProps>=({UnitClickHandler,unit,style})=>{
@@ -40,7 +37,7 @@ export const Unit:FC<UnitProps>=({UnitClickHandler,unit,style})=>{
         width:`${hpPercent}%`
     }
     return (
-        <div style={newStyle} className={st.Unit} onClick={()=>handleUnitClick(x,y,UnitClickHandler||(()=>console.log(1)))}>
+        <div style={newStyle} className={st.Unit} onClick={()=>handleUnitClick(x,y,UnitClickHandler||(()=>{}))}>
             <div className={st.HpBarCont} style={HpBarContStyle}>
                 <div className={st.HpBar} style={HpBarStyle}></div>
             </div>

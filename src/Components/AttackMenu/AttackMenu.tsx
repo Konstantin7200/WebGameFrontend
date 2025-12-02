@@ -52,7 +52,6 @@ export const AttackMenu:FC<AttackMenuProps>=({attacks1,attacks2,handleCLick,unit
         const style={
             right:`${units[i].side?3:46}rem`
         }
-        console.log(style,units[i].side);
         unitMas.push(<Unit key={`unit${i}`} unit={units[i]} style={style}/>)
     }
     return (
