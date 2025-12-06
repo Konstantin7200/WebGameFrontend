@@ -9,7 +9,8 @@ import RangedPierce from "../../Assets/WeaponIcons/PierceRanged.png"
 
 
 interface AttackProps{
-    attack:any
+    attack:any,
+    displayedDamage:number
 }
 function getAttackIcon(damageType:number,attackType:number){
     let mas=[Arcane,Fire,PierceMelee,SlashMelee,SmashMelee];
@@ -25,7 +26,7 @@ function getAttackIcon(damageType:number,attackType:number){
 }
 
 
-export const Attack:FC<AttackProps>=({attack})=>{
+export const Attack:FC<AttackProps>=({attack,displayedDamage})=>{
     const attackType=attack.attackType==1?"melee":"ranged";
     const myImage=getAttackIcon(attack.damageType,attack.attackType);
     return(
@@ -37,7 +38,7 @@ export const Attack:FC<AttackProps>=({attack})=>{
                 {attack.attackName}
             </div>
             <div>
-            {attack.damage}X{attack.attacksAmount}
+            {displayedDamage}X{attack.attacksAmount}
             </div>
         </div>
     )

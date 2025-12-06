@@ -4,41 +4,51 @@ import st from "./AttackMenu.module.css"
 import { Unit } from '../Unit/Unit'
 
 interface AttackMenuProps{
-    attacks1:any
-    attacks2:any
     handleCLick:(attack1:any,attack2:any)=>void,
     units:any
 }
+const damageTypes=["Arcane","Fire","Pierce","Slash","Smash"]
 
-const getAttacksOnType=(attacks1:any,attacks2:any,type:number)=>{
+const calculateAttackDamage=(attack:any,defender:any)=>{
+    return Math.floor(attack.damage*(1-defender.baseUnit.resistances[damageTypes[attack.damageType]]))
+}
+
+const getAttacksOnType=(units:any,type:number)=>{
+    const attacks1=JSON.parse(JSON.stringify(units[0].baseUnit.attacks));
+    const attacks2=JSON.parse(JSON.stringify(units[1].baseUnit.attacks));
     const mas1=[];
     let fakeAttack={attackName:"Nothing",attackType:type,damage:0,attacksAmount:0};
     for(let i=0;i<attacks1.length;i++)
     {
         if(attacks1[i].attackType===type)
-            mas1.push(<Attack key={"mas1"+i} attack={attacks1[i]}></Attack>);
+        {
+            
+            mas1.push(<Attack key={"mas1"+i} attack={attacks1[i]} displayedDamage={calculateAttackDamage(attacks1[i],units[1])}></Attack>);
+        }
     }
     if(mas1.length==0)
         return null;
     for(let i=0;i<attacks2.length;i++)
     {
         if(attacks2[i].attackType===type)
-            mas1.push(<Attack key={"mas2"+i} attack={attacks2[i]}></Attack>);
+        {
+            mas1.push(<Attack key={"mas2"+i} attack={attacks2[i]} displayedDamage={calculateAttackDamage(attacks2[i],units[0])}></Attack>);
+        }
     }
     if(mas1.length==1)
-        mas1.push(<Attack key={"mas2"+0} attack={fakeAttack}/>);
+        mas1.push(<Attack key={"mas2"+0} attack={fakeAttack} displayedDamage={0}/>);
     return mas1;
 }
 
 
 
-export const AttackMenu:FC<AttackMenuProps>=({attacks1,attacks2,handleCLick,units})=>{
-    if(attacks1==null)
+export const AttackMenu:FC<AttackMenuProps>=({handleCLick,units})=>{
+    /*if(attacks1==null)
         return(
     <div></div>
-    )
-    const mas1=getAttacksOnType(attacks1,attacks2,1);
-    const mas2=getAttacksOnType(attacks1,attacks2,0);
+    )*/
+    const mas1=getAttacksOnType(units,1);
+    const mas2=getAttacksOnType(units,0);
     let index=[0,1];
     if(units[0].side)
     {

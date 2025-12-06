@@ -1,8 +1,13 @@
 import { FC } from "react"
-import Swordsman from "../../Assets/UnitSprites/VeteranSwordsman.gif"
 import st from "./Unit.module.css"
 import Archer from "../../Assets/UnitSprites/ElfSharpshooter.gif"
 import Lord from "../../Assets/UnitSprites/ElfLord.gif"
+import Paladin from "../../Assets/UnitSprites/BlessedGladiator.gif"
+import Javeliner from "../../Assets/UnitSprites/BoldManAtArms.gif"
+import Axer from "../../Assets/UnitSprites/DeterminedSoldier.gif"
+import SwordAngel from "../../Assets/UnitSprites/SwordArchon.gif"
+import AngelDeva from "../../Assets/UnitSprites/RighteousDeva.gif"
+import Priest from "../../Assets/UnitSprites/ZealousPriest.gif"
 
 interface UnitProps{
     unit:any,
@@ -12,7 +17,7 @@ interface UnitProps{
 const handleUnitClick=(x:number,y:number,UnitClickHandler:(x:number,y:number)=>void)=>{
     UnitClickHandler(x,y);
 }
-const UnitSprites=new Map([["Swordsman",Swordsman],["Lord",Lord],["Archer",Archer]]);
+const UnitSprites=new Map([["Lord",Lord],["Archer",Archer],["Paladin",Paladin],["Axer",Axer],["SwordAngel",SwordAngel],["Priest",Priest],["Javeliner",Javeliner],["AngelDeva",AngelDeva]]);
 const getUnitSprite=(type:string)=>{
     return UnitSprites.get(type);
 }
@@ -20,7 +25,7 @@ const getUnitSprite=(type:string)=>{
 export const Unit:FC<UnitProps>=({UnitClickHandler,unit,style})=>{
     let { centerX, centerY, x, y, side, health } = unit;
     let  baseHealth=unit.baseUnit.health;
-    let type=unit.baseUnit.type||"Swordsman";
+    let type=unit.baseUnit.type;
     centerY+=25;
     centerX+=30;
     let rotation=side?-1:1
