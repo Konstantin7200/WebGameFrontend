@@ -40,12 +40,12 @@ export const UnitService={
         const data=await response.json()
         if(data===-1)
             return {
-        gameWinner:"Right",
+        gameWinner:"Left",
         gameOver:true
         }
         if(data===1){
             return {
-        gameWinner:"Left",
+        gameWinner:"Right",
         gameOver:true
         }
     }

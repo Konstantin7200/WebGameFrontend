@@ -9,8 +9,8 @@ interface PlayerSelectionMenuProps{
 
 
 export const PlayerSelectionMenu:FC<PlayerSelectionMenuProps>=({onClickFunc})=>{
-    const createNewConfig=()=>{
-        GameService.createNewGame(playerTypes)
+    const createNewConfig=async()=>{
+        await GameService.createNewGame(playerTypes)
     }
     const clickHandler=()=>{
         createNewConfig();

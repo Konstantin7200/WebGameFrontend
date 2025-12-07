@@ -14,11 +14,10 @@ const App=()=>{
     const endGame=()=>{
         setInGame(0);
     }
-
     const[inGame,setInGame]=useState(0);
     return(
         <div className="App">
-            {inGame==2&&<BattleMap endGame={endGame}/>}
+            {inGame==2&&<BattleMap endGame={endGame} key={inGame}/>}
             {inGame==0&&<MainMenu startGame={loadPlayerSelectionMenu}/>}
             {inGame==1&&<PlayerSelectionMenu onClickFunc={startGame}/>}
         </div>

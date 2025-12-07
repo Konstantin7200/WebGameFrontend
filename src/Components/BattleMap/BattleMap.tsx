@@ -5,6 +5,7 @@ import { UnitsMap } from "../../Components/UnitsMap/UnitsMap";
 import { AttackMenu } from "../../Components/AttackMenu/AttackMenu";
 import { UnitService } from "../../API/UnitsService";
 import { GameService } from "../../API/GameService";
+import { resolve } from "path";
 
 interface BattleMapProps{
     endGame:any,
@@ -12,14 +13,10 @@ interface BattleMapProps{
 
 export const BattleMap:FC<BattleMapProps>=({endGame})=>{
     let inGame=true;
-    const start=async()=>
-    {
-        loadUnits();
-        endTurn();
-    };
     const loadUnits=async()=>{
         const loadedUnits=await UnitService.loadUnits();
         setUnits(loadedUnits);
+        return loadedUnits;
     }
     const unitClickHandler=async(x:number,y:number)=>{
         const avalibleHexes=await UnitService.getAvailableMovesForUnit(x,y);
@@ -84,7 +81,22 @@ export const BattleMap:FC<BattleMapProps>=({endGame})=>{
         }
         
     }
-    //useEffect(generateUnits,[inGame])
+    const start=async()=>
+    {
+        let delay=100;
+        for(let i=0;i<5;i++)
+        {
+            const result=await loadUnits();
+            if(result?.length!=0)
+                break;
+            await new Promise(resolve=>setTimeout(resolve,delay))
+            delay*=2;
+        }
+        await endTurn();
+    };
+    useEffect(()=>{
+    start();
+    },[])
     const [selectedUnits,setSelectedUnits]=useState([{x:-5,y:1},{x:1,y:1}])
     const [units,setUnits]=useState(null);
     const [hexesForUnit,setHexesForUnit]=useState(null);
@@ -92,7 +104,7 @@ export const BattleMap:FC<BattleMapProps>=({endGame})=>{
     return (
         <div className={st.BattleMap}>
             <button disabled={disabled} onClick={endTurn}>End turn</button>
-            <button onClick={start}>Start game</button>
+            
         <h1>Супер пупер игра</h1>
         <div>
         <UnitsMap units={units} UnitClickHandler={unitClickHandler}/>
