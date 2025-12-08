@@ -28,10 +28,12 @@ export const BattleMap:FC<BattleMapProps>=({endGame})=>{
         freeHexClickHandler(x,y,movesToReach);
         if(isEnemies)
         {
-            enemyClickHandler(x,y,prev);   
+            await freeHexClickHandler(prev.x, prev.y, prev.moves);
+            enemyClickHandler(x,y);   
         }
     }
     const endTurn=async()=>{
+        setTurn(turn+1);
         if(inGame){
         await GameService.endTurn();
         const nextPlayerIsAi=await GameService.checkIsNextPlayerAI();
@@ -58,8 +60,7 @@ export const BattleMap:FC<BattleMapProps>=({endGame})=>{
         unitClickHandler(x,y);
     }
 
-    const enemyClickHandler = async (x: number, y: number, prev: any) => {
-        await freeHexClickHandler(prev.x, prev.y, prev.moves);
+    const enemyClickHandler = async (x: number, y: number) => {
         const unit1 = await UnitService.getLastUnit();
         const unit2 = await UnitService.getUnit(x,y);
         setSelectedUnits([unit1,unit2])
@@ -98,18 +99,19 @@ export const BattleMap:FC<BattleMapProps>=({endGame})=>{
     useEffect(()=>{
     start();
     },[])
-    const defaultUnit:UnitType={x:-5,y:1,health:0,baseUnit:{health:0,type:"",resistances:new Map,attacks:[]},side:false};
+    const defaultUnit:UnitType={x:-5,y:1,health:0,baseUnit:{health:0,type:"",resistances:new Map,attacks:[]},side:0};
     const [selectedUnits,setSelectedUnits]=useState([defaultUnit,defaultUnit])
     const [units,setUnits]=useState([]);
     const [hexesForUnit,setHexesForUnit]=useState(null);
     const [disabled,setDisabled]=useState(false);
+    const [turn,setTurn]=useState(-1);
     return (
         <div className={st.BattleMap}>
             <button disabled={disabled} onClick={endTurn}>End turn</button>
             
         <h1>Супер пупер игра</h1>
         <div>
-        <UnitsMap units={units} UnitClickHandler={unitClickHandler}/>
+        <UnitsMap currentTurn={turn} units={units} UnitClickHandler={unitClickHandler}/>
         <HexMap hexesForUnit={hexesForUnit} onHexClick={hexClickHandler} />
         </div>
         {selectedUnits[0].x!== -5&&<AttackMenu units={selectedUnits} handleCLick={handleAttackClick}/>}

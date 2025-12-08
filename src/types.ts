@@ -4,7 +4,7 @@ export type UnitType={
     baseUnit:BaseUnit,
     x:number,
     y:number,
-    side:boolean,
+    side:number,
     health:number
 }
 type BaseUnit={

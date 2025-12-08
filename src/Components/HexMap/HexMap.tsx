@@ -20,7 +20,7 @@ const HexMap:FC<HexMapProps>=({size=7,hexSize=60,hexesForUnit,onHexClick})=>{
     const mapHeight:number=(size-1)*rowHeight+rowHeight*2;
     const hexesForUnitMap=new Map();
     const enemiesHexesMap=new Map();
-    if(hexesForUnit!=null)
+    if(hexesForUnit?.enemiesHexes!=null)
     {
     const freeHexes=hexesForUnit.hexes;
     const enemiesHexes=hexesForUnit.enemiesHexes;

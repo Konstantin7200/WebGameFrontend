@@ -13,7 +13,8 @@ import { UnitType } from "../../types"
 interface UnitProps{
     unit:UnitType,
     UnitClickHandler?:(x:number,y:number)=>void,
-    style?:any
+    style?:any,
+    clickable:boolean
 }
 const handleUnitClick=(x:number,y:number,UnitClickHandler:(x:number,y:number)=>void)=>{
     UnitClickHandler(x,y);
@@ -23,15 +24,17 @@ const getUnitSprite=(type:string)=>{
     return UnitSprites.get(type);
 }
 
-export const Unit:FC<UnitProps>=({UnitClickHandler,unit,style})=>{
+export const Unit:FC<UnitProps>=({UnitClickHandler,unit,style,clickable})=>{
     let { x, y, side, health } = unit;
     let  baseHealth=unit.baseUnit.health;
     let type=unit.baseUnit.type;
-    let rotation=side?-1:1
+    let rotation=side?-1:1;
+    let pointerEvents=clickable?"auto":"none"
     let color=side?'red':'blue';
     let hpPercent=100.0*health/baseHealth;
     const newStyle={
         transform:`scaleX(${rotation})`,
+        pointerEvents:pointerEvents,
         ...style
     }
     const HpBarContStyle={

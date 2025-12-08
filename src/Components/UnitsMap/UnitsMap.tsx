@@ -8,9 +8,10 @@ interface UnitsMapProps{
     hexSize?:number
     units:UnitType[]
     UnitClickHandler:(x:number,y:number)=>void
+    currentTurn:number
 }
 
-export const UnitsMap:FC<UnitsMapProps>=({size=7,hexSize=60,units,UnitClickHandler})=>{
+export const UnitsMap:FC<UnitsMapProps>=({size=7,hexSize=60,units,UnitClickHandler,currentTurn})=>{
     let index=0;
     const unitsMas=[];
     let rowHeight:number=1.5*hexSize;
@@ -29,8 +30,7 @@ export const UnitsMap:FC<UnitsMapProps>=({size=7,hexSize=60,units,UnitClickHandl
                 offset=0;
             else offset=-hexWidth/2;
             index++;
-
-            unitsMas.push(<Unit key={`${x}-${y}`} unit={units[i]} style={{left:x*hexWidth+offset+25+'px',top:y*rowHeight+20+'px'}} UnitClickHandler={UnitClickHandler} ></Unit>)
+            unitsMas.push(<Unit clickable={(currentTurn+units[i].side)%2==0} key={`${x}-${y}`} unit={units[i]} style={{left:x*hexWidth+offset+25+'px',top:y*rowHeight+20+'px'}} UnitClickHandler={UnitClickHandler} ></Unit>)
         }
     }
 

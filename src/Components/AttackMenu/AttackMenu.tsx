@@ -62,7 +62,7 @@ export const AttackMenu:FC<AttackMenuProps>=({handleCLick,units})=>{
         const style={
             right:`${units[i].side?3:46}rem`
         }
-        unitMas.push(<Unit key={`unit${i}`} unit={units[i]} style={style}/>)
+        unitMas.push(<Unit clickable={false} key={`unit${i}`} unit={units[i]} style={style}/>)
     }
     return (
         <div className={st.AttackMenu}>
