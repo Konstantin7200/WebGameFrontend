@@ -23,8 +23,13 @@ interface HexProps{
 
 const Hex:FC<HexProps>=({size,centerX,centerY,onHexClick,hex})=>{
     const [width,height]=calculateWidthAndHeight(size);
-    let color=hex.isForUnit?'radial-gradient(burlywood,rgba(192, 222, 25, 1))':'radial-gradient(burlywood,rgb(230, 161, 71))'
-    color=hex.isEnemies?'radial-gradient(burlywood,rgba(234, 17, 17, 1))':color;
+    let color;
+    if(hex.isForUnit)
+    {
+        color='radial-gradient(burlywood,rgba(192, 222, 25, 1))'
+    }
+    if(hex.isEnemies)
+        color='radial-gradient(burlywood,rgba(234, 17, 17, 1))'
     const style={
         width:`${width}px`,
         height:`${height}px`,
