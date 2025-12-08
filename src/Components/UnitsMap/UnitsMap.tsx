@@ -1,11 +1,12 @@
 import {FC} from "react"
 import { Unit } from "../Unit/Unit";
 import st from "./UnitsMap.module.css"
+import { UnitType } from "../../types";
 
 interface UnitsMapProps{
     size?:number,
     hexSize?:number
-    units:any
+    units:UnitType[]
     UnitClickHandler:(x:number,y:number)=>void
 }
 
@@ -17,7 +18,7 @@ export const UnitsMap:FC<UnitsMapProps>=({size=7,hexSize=60,units,UnitClickHandl
     let offset:number;
 
     
-    if(units!=null)
+    if(units?.length!=0)
     {
         //console.log(units);
         for(let i=0;i<units.length;i++)

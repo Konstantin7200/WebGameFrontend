@@ -1,6 +1,7 @@
 import {FC} from 'react'
 import Hex from '../Hex/Hex'
 import st from "./HexMap.module.css"
+import { HexType } from '../../types'
 
 interface HexMapProps{
     size?:number,
@@ -41,9 +42,18 @@ const HexMap:FC<HexMapProps>=({size=7,hexSize=60,hexesForUnit,onHexClick})=>{
     {
         columns=size;
         offset=i%2==0?0:-hexWidth/2;
+        
         for(let j=0;j<columns;j++)
         {
-            hexElements.push(<Hex key={`${j}-${i}`} isForUnit={hexesForUnitMap.has(`${j},${i}`)} centerX={j*hexWidth+offset} centerY={i*rowHeight} size={hexSize} x={j} y={i} movesToReach={hexesForUnitMap.get(`${j},${i}`)} isEnemies={enemiesHexesMap.has(`${j},${i}`)} onHexClick={onHexClick} prev={enemiesHexesMap.get(`${j},${i}`)}/>)
+            const hex:HexType={
+                isForUnit:hexesForUnitMap.has(`${j},${i}`),
+                x:j,
+                y:i,
+                movesToReach:hexesForUnitMap.get(`${j},${i}`),
+                isEnemies:enemiesHexesMap.has(`${j},${i}`),
+                prev:enemiesHexesMap.get(`${j},${i}`)
+            }
+            hexElements.push(<Hex key={`${j}-${i}`} hex={hex}  centerX={j*hexWidth+offset} centerY={i*rowHeight} size={hexSize}  onHexClick={onHexClick}/>)
         }
     }
     return (

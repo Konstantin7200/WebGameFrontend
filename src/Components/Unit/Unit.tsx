@@ -8,9 +8,10 @@ import Axer from "../../Assets/UnitSprites/DeterminedSoldier.gif"
 import SwordAngel from "../../Assets/UnitSprites/SwordArchon.gif"
 import AngelDeva from "../../Assets/UnitSprites/RighteousDeva.gif"
 import Priest from "../../Assets/UnitSprites/ZealousPriest.gif"
+import { UnitType } from "../../types"
 
 interface UnitProps{
-    unit:any,
+    unit:UnitType,
     UnitClickHandler?:(x:number,y:number)=>void,
     style?:any
 }
@@ -23,11 +24,9 @@ const getUnitSprite=(type:string)=>{
 }
 
 export const Unit:FC<UnitProps>=({UnitClickHandler,unit,style})=>{
-    let { centerX, centerY, x, y, side, health } = unit;
+    let { x, y, side, health } = unit;
     let  baseHealth=unit.baseUnit.health;
     let type=unit.baseUnit.type;
-    centerY+=25;
-    centerX+=30;
     let rotation=side?-1:1
     let color=side?'red':'blue';
     let hpPercent=100.0*health/baseHealth;

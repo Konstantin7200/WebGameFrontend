@@ -6,16 +6,17 @@ import SmashMelee from "../../Assets/WeaponIcons/Smash.png"
 import Fire from "../../Assets/WeaponIcons/Fire.png"
 import PierceMelee from "../../Assets/WeaponIcons/Pierce.png"
 import RangedPierce from "../../Assets/WeaponIcons/PierceRanged.png"
+import { AttackType } from "../../types";
 
 
 interface AttackProps{
-    attack:any,
+    attack:AttackType,
     displayedDamage:number
 }
 function getAttackIcon(damageType:number,attackType:number){
     let mas=[Arcane,Fire,PierceMelee,SlashMelee,SmashMelee];
     let rangedMas=[Arcane,Fire,RangedPierce]
-    if(damageType==undefined)
+    if(damageType==-1)
         return null;
     if(attackType==0)
     {

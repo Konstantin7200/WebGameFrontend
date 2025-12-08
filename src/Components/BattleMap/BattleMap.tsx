@@ -6,6 +6,7 @@ import { AttackMenu } from "../../Components/AttackMenu/AttackMenu";
 import { UnitService } from "../../API/UnitsService";
 import { GameService } from "../../API/GameService";
 import { resolve } from "path";
+import { UnitType } from "../../types";
 
 interface BattleMapProps{
     endGame:any,
@@ -69,7 +70,7 @@ export const BattleMap:FC<BattleMapProps>=({endGame})=>{
         loadUnits();
         checkIfLeadersAreDead();
         unitClickHandler(selectedUnits[0].x,selectedUnits[0].y);
-        setSelectedUnits([{x:-5,y:1},{x:1,y:1}]);
+        setSelectedUnits([defaultUnit,defaultUnit]);
     }
     const checkIfLeadersAreDead=async()=>{
         const data=await UnitService.checkIfLeadersAreDead();
@@ -97,8 +98,9 @@ export const BattleMap:FC<BattleMapProps>=({endGame})=>{
     useEffect(()=>{
     start();
     },[])
-    const [selectedUnits,setSelectedUnits]=useState([{x:-5,y:1},{x:1,y:1}])
-    const [units,setUnits]=useState(null);
+    const defaultUnit:UnitType={x:-5,y:1,health:0,baseUnit:{health:0,type:"",resistances:new Map,attacks:[]},side:false};
+    const [selectedUnits,setSelectedUnits]=useState([defaultUnit,defaultUnit])
+    const [units,setUnits]=useState([]);
     const [hexesForUnit,setHexesForUnit]=useState(null);
     const [disabled,setDisabled]=useState(false);
     return (

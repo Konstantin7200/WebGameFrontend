@@ -2,42 +2,42 @@ import {FC} from 'react'
 import { Attack } from '../Attack/Attack'
 import st from "./AttackMenu.module.css"
 import { Unit } from '../Unit/Unit'
+import { AttackType, UnitType } from '../../types'
 
 interface AttackMenuProps{
     handleCLick:(attack1:any,attack2:any)=>void,
-    units:any
+    units:UnitType[]
 }
 const damageTypes=["Arcane","Fire","Pierce","Slash","Smash"]
 
-const calculateAttackDamage=(attack:any,defender:any)=>{
+const calculateAttackDamage=(attack:AttackType,defender:any)=>{
     return Math.floor(attack.damage*(1-defender.baseUnit.resistances[damageTypes[attack.damageType]]))
 }
 
-const getAttacksOnType=(units:any,type:number)=>{
+const getAttacksOnType=(units:UnitType[],type:number)=>{
     const attacks1=JSON.parse(JSON.stringify(units[0].baseUnit.attacks));
     const attacks2=JSON.parse(JSON.stringify(units[1].baseUnit.attacks));
-    const mas1=[];
-    let fakeAttack={attackName:"Nothing",attackType:type,damage:0,attacksAmount:0};
+    const mas=[];
+    let fakeAttack:AttackType={attackName:"Nothing",attackType:type,damage:0,attacksAmount:0,damageType:-1};
     for(let i=0;i<attacks1.length;i++)
     {
         if(attacks1[i].attackType===type)
         {
-            
-            mas1.push(<Attack key={"mas1"+i} attack={attacks1[i]} displayedDamage={calculateAttackDamage(attacks1[i],units[1])}></Attack>);
+            mas.push(<Attack key={"mas1"+i} attack={attacks1[i]} displayedDamage={calculateAttackDamage(attacks1[i],units[1])}></Attack>);
         }
     }
-    if(mas1.length==0)
+    if(mas.length==0)
         return null;
     for(let i=0;i<attacks2.length;i++)
     {
         if(attacks2[i].attackType===type)
         {
-            mas1.push(<Attack key={"mas2"+i} attack={attacks2[i]} displayedDamage={calculateAttackDamage(attacks2[i],units[0])}></Attack>);
+            mas.push(<Attack key={"mas2"+i} attack={attacks2[i]} displayedDamage={calculateAttackDamage(attacks2[i],units[0])}></Attack>);
         }
     }
-    if(mas1.length==1)
-        mas1.push(<Attack key={"mas2"+0} attack={fakeAttack} displayedDamage={0}/>);
-    return mas1;
+    if(mas.length==1)
+        mas.push(<Attack key={"mas2"+0} attack={fakeAttack} displayedDamage={0}/>);
+    return mas;
 }
 
 

@@ -12,8 +12,8 @@ export const PlayerSelectionMenu:FC<PlayerSelectionMenuProps>=({onClickFunc})=>{
     const createNewConfig=async()=>{
         await GameService.createNewGame(playerTypes)
     }
-    const clickHandler=()=>{
-        createNewConfig();
+    const clickHandler=async()=>{
+        await createNewConfig();
         onClickFunc();
     }
     const onSelect=(index:number,value:string)=>{
