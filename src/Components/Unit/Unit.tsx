@@ -8,6 +8,7 @@ import Axer from "../../Assets/UnitSprites/DeterminedSoldier.gif"
 import SwordAngel from "../../Assets/UnitSprites/SwordArchon.gif"
 import AngelDeva from "../../Assets/UnitSprites/RighteousDeva.gif"
 import Priest from "../../Assets/UnitSprites/ZealousPriest.gif"
+import Acolyte from "../../Assets/UnitSprites/DevoutAcolyte.gif"
 import { UnitType } from "../../types"
 
 interface UnitProps{
@@ -19,7 +20,7 @@ interface UnitProps{
 const handleUnitClick=(x:number,y:number,UnitClickHandler:(x:number,y:number)=>void)=>{
     UnitClickHandler(x,y);
 }
-const UnitSprites=new Map([["Lord",Lord],["Archer",Archer],["Paladin",Paladin],["Axer",Axer],["SwordAngel",SwordAngel],["Priest",Priest],["Javeliner",Javeliner],["AngelDeva",AngelDeva]]);
+const UnitSprites=new Map([["Lord",Lord],["Acolyte",Acolyte],["Archer",Archer],["Paladin",Paladin],["Axer",Axer],["SwordAngel",SwordAngel],["Priest",Priest],["Javeliner",Javeliner],["AngelDeva",AngelDeva]]);
 const getUnitSprite=(type:string)=>{
     return UnitSprites.get(type);
 }

@@ -5,7 +5,6 @@ import { UnitsMap } from "../../Components/UnitsMap/UnitsMap";
 import { AttackMenu } from "../../Components/AttackMenu/AttackMenu";
 import { UnitService } from "../../API/UnitsService";
 import { GameService } from "../../API/GameService";
-import { resolve } from "path";
 import { UnitType } from "../../types";
 
 interface BattleMapProps{
@@ -33,10 +32,11 @@ export const BattleMap:FC<BattleMapProps>=({endGame})=>{
         }
     }
     const endTurn=async()=>{
-        setTurn(turn+1);
+        setTurn(prev=>prev+1);
         if(inGame){
         await GameService.endTurn();
         const nextPlayerIsAi=await GameService.checkIsNextPlayerAI();
+        await loadUnits();
         if(nextPlayerIsAi)
             makeAIMove();
     }
