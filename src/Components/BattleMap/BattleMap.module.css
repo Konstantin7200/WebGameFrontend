@@ -1,6 +1,6 @@
 .BattleMap {
   text-align: center;
-  background-image:url("../../Assets/background/Cartoon_Medieval_Training\ Arena_Level_Set_Background\ -\ Layer\ 00.png");
+  background-color: black;
   background-repeat: no-repeat;
   background-size: cover;
   display: flex;
@@ -9,4 +9,77 @@
   align-items: center;
   color: black;
   height: 100vh;
+  z-index: 0;
+}
+
+.RightColumn {
+  z-index: 1;
+  width: 250px;
+  background-color: #61748e;
+  position: absolute;
+  height: 100vh;
+  right: 0;
+  box-shadow: -5px 0 15px white;
+}
+.LeftColumn {
+  z-index: 1;
+  width: 250px;
+  background-color: #61748e;
+  position: absolute;
+  height: 100vh;
+  left: 0;
+  box-shadow: 5px 0 15px white;
+}
+
+.LeftColumn > button {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 10%;
+  left: 0;
+  font-size: 2rem;
+  color: black;
+  background-color: #7fa9e2;
+  border: none;
+}
+
+.LeftColumn > button:hover {
+  background-color: #6a8fc3;
+}
+.LeftColumn>button:active{
+  background-color: #61748e;
+}
+.LeftColumn>button:disabled{
+  background-color:darkgray;
+}
+
+@keyframes spin{
+  from{
+    transform: rotate(0deg);
+  }
+  to{
+    transform: rotate(360deg);
+  }
+}
+@keyframes pulse{
+  0%{
+    font-size: 2rem;
+  }
+  50%{
+    font-size: 2.5rem;
+  }
+  100%{
+    font-size: 2rem;
+  }   
+}
+@keyframes bounce {
+  0%{
+    transform: translateY(0);
+  }
+  50%{
+    transform: translateY(-300px);
+  }
+  100%{
+    transform: translateY(0);
+  }
 }

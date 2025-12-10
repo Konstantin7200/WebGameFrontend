@@ -1,3 +1,8 @@
 .App {
   color: black;
+  font-family: "Cinzel";
+}
+button,option,select{
+  font-family: "Bellefair";
+  font-size: 20px;
 }

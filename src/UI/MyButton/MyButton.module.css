@@ -1,0 +1,53 @@
+.MyButton {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 10%;
+  left: 0;
+  font-size: 2rem;
+  color: black;
+  background-color: #7fa9e2;
+  border: none;
+}
+
+.MyButton:hover {
+  background-color: #6a8fc3;
+  animation: pulse 1s infinite;
+}
+.MyButton:active{
+  background-color: #61748e;
+}
+.MyButton:disabled{
+  background-color:darkgray;
+}
+
+@keyframes spin{
+  from{
+    transform: rotate(0deg);
+  }
+  to{
+    transform: rotate(360deg);
+  }
+}
+@keyframes pulse{
+  0%{
+    font-size: 2rem;
+  }
+  50%{
+    font-size: 2.1rem;
+  }
+  100%{
+    font-size: 2rem;
+  }   
+}
+@keyframes bounce {
+  0%{
+    transform: translateY(0);
+  }
+  50%{
+    transform: translateY(-300px);
+  }
+  100%{
+    transform: translateY(0);
+  }
+}

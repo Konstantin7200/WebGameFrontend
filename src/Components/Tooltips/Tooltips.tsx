@@ -14,9 +14,13 @@ export const Tooltips:FC<TooltipsProps>=({children})=>
     return (
         <>
         {children}
-        <Tooltip style={tooltipStyle} id="unitTooltip" delayHide={300} delayShow={100} content="Click me to view my moves"/>
-        <Tooltip style={tooltipStyle}  delayShow={300} delayHide={300} content={"Click me to attack the enemy"} id="hexToAttack"/>
-        <Tooltip style={tooltipStyle}  delayShow={300} delayHide={300} content={"Click me to move here"} id="hexToMove"/>
+        <Tooltip style={tooltipStyle} id="unitTooltipEN" delayHide={300} delayShow={100} content="Click to view my moves"/>
+        <Tooltip style={tooltipStyle} id="hexToAttackEN"  delayShow={300} delayHide={300} content="Click to attack the enemy" />
+        <Tooltip style={tooltipStyle} id="hexToMoveEN" delayShow={300} delayHide={300} content="Click to move here" />
+
+        <Tooltip style={tooltipStyle} id="unitTooltip" delayHide={300} delayShow={100} content="Нажми чтобы посмотреть доступные ходы"/>
+        <Tooltip style={tooltipStyle} id="hexToAttack"  delayShow={300} delayHide={300} content="Нажми чтобы аттаковать" />
+        <Tooltip style={tooltipStyle} id="hexToMove" delayShow={300} delayHide={300} content="Нажми чтобы походить сюда" />
         </>
     )
 }

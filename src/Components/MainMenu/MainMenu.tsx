@@ -9,9 +9,11 @@ interface MainMenuProps{
 
 export const MainMenu:FC<MainMenuProps>=({startGame})=>{
     return (<div className={st.MainMenu}>
+        <div className={st.RightColumn}></div>  
+        <div className={st.LeftColumn}></div>
         <div>
-            <img src="logo.png" alt="" />
-        <h1>The battle of 6 nations</h1>
+            <img src="newLogo.png" alt="" />
+        <h1>Battle of 6 nations</h1>
         </div>
         <button onClick={startGame}>Start game</button>
     </div>)

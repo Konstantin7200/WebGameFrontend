@@ -22,7 +22,10 @@ export const PlayerSelectionMenu:FC<PlayerSelectionMenuProps>=({onClickFunc})=>{
         setPlayerTypes(newSides);
     }
     const [playerTypes,setPlayerTypes]=useState(["Player","Player"]);
-    return (<div className={st.PlayerSelectionMenu}>
+    return (
+    <div className={st.PlayerSelectionMenu}>
+        <div className={st.RightColumn}></div>  
+        <div className={st.LeftColumn}></div>
         <div>
         <select value={playerTypes[0]} onChange={(e)=>onSelect(0,e.target.value)}>
             <option>Player</option>

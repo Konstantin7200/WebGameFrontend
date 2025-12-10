@@ -34,12 +34,12 @@ export const BattleMap:FC<BattleMapProps>=({endGame})=>{
     const endTurn=async()=>{
         setTurn(prev=>prev+1);
         if(inGame){
-        await GameService.endTurn();
-        const nextPlayerIsAi=await GameService.checkIsNextPlayerAI();
-        await loadUnits();
-        if(nextPlayerIsAi)
-            makeAIMove();
-    }
+            await GameService.endTurn();
+            const nextPlayerIsAi=await GameService.checkIsNextPlayerAI();
+            await loadUnits();
+            if(nextPlayerIsAi)
+                makeAIMove();
+        }
     }
     const makeAIMove=async ()=>{
         setDisabled(true);
@@ -105,15 +105,20 @@ export const BattleMap:FC<BattleMapProps>=({endGame})=>{
     const [hexesForUnit,setHexesForUnit]=useState(null);
     const [disabled,setDisabled]=useState(false);
     const [turn,setTurn]=useState(-1);
+    let currentSide=turn%2==0?"Left":"Right"
     return (
         <div className={st.BattleMap}>
-            
+        <div className={st.RightColumn}></div>  
+        <div className={st.LeftColumn}>
+            <button disabled={disabled} onClick={endTurn}>End turn</button>
+            <h1>Turn:{turn}</h1>
+            <h1>{currentSide} sides turn</h1>
+        </div>  
         <div>
         <UnitsMap currentTurn={turn} units={units} UnitClickHandler={unitClickHandler}/>
         <HexMap hexesForUnit={hexesForUnit} onHexClick={hexClickHandler} />
         </div>
         {selectedUnits[0].x!== -5&&<AttackMenu units={selectedUnits} handleCLick={handleAttackClick}/>}
-        <button disabled={disabled} onClick={endTurn}>End turn</button>
         </div>
     )
 }

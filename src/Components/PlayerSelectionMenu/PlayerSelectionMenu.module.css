@@ -3,9 +3,28 @@
   flex-direction: column;
   justify-content: space-around;
   height: 100vh;
+  background-color: black;
 }
 .PlayerSelectionMenu > div {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+}
+.RightColumn {
+  z-index: 1;
+  width: 250px;
+  background-color: #61748e;
+  position: absolute;
+  height: 100vh;
+  right: 0;
+  box-shadow: -5px 0 15px white;
+}
+.LeftColumn {
+  z-index: 1;
+  width: 250px;
+  background-color: #61748e;
+  position: absolute;
+  height: 100vh;
+  left: 0;
+  box-shadow: 5px 0 15px white;
 }
