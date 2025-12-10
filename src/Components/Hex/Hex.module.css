@@ -3,7 +3,5 @@
 }
 
 .Hex:hover svg polygon {
-  fill: #60a5fa !important;
-  transition: 0.1s;
+  stroke-width: 5px;
 }
-

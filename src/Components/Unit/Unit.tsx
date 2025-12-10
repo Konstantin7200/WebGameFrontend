@@ -11,6 +11,7 @@ import Priest from "../../Assets/UnitSprites/ZealousPriest.gif"
 import Acolyte from "../../Assets/UnitSprites/DevoutAcolyte.gif"
 import { UnitType } from "../../types"
 
+
 interface UnitProps{
     unit:UnitType,
     UnitClickHandler?:(x:number,y:number)=>void,
@@ -38,18 +39,23 @@ export const Unit:FC<UnitProps>=({UnitClickHandler,unit,style,clickable})=>{
         pointerEvents:pointerEvents,
         ...style
     }
+    let tooltipId=`unitTooltip`
     const HpBarContStyle={
         border:`${color} 2px solid`
     }
     const HpBarStyle={
         width:`${hpPercent}%`
     }
+    
     return (
-        <div style={newStyle} className={st.Unit} onClick={()=>handleUnitClick(x,y,UnitClickHandler||(()=>{}))}>
-            <div className={st.HpBarCont} style={HpBarContStyle}>
+        <div>
+        <div data-tooltip-id={tooltipId} style={newStyle} className={st.Unit} onClick={()=>handleUnitClick(x,y,UnitClickHandler||(()=>{}))}>
+            <div  className={st.HpBarCont} style={HpBarContStyle}>
                 <div className={st.HpBar} style={HpBarStyle}></div>
             </div>
             <img src={getUnitSprite(type)} alt="swordsmanSprite" />
+        </div>
+        
         </div>
     )
 }

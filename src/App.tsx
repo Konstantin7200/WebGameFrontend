@@ -3,6 +3,7 @@ import "./App.css"
 import { BattleMap } from "./Components/BattleMap/BattleMap"
 import { MainMenu } from "./Components/MainMenu/MainMenu";
 import { PlayerSelectionMenu } from "./Components/PlayerSelectionMenu/PlayerSelectionMenu";
+import { Tooltips } from "./Components/Tooltips/Tooltips";
 
 const App=()=>{
     const startGame=()=>{
@@ -17,7 +18,7 @@ const App=()=>{
     const[inGame,setInGame]=useState(0);
     return(
         <div className="App">
-            {inGame==2&&<BattleMap endGame={endGame} key={inGame}/>}
+            {inGame==2&&<Tooltips children={<BattleMap endGame={endGame} key={inGame}/>}/>}
             {inGame==0&&<MainMenu startGame={loadPlayerSelectionMenu}/>}
             {inGame==1&&<PlayerSelectionMenu onClickFunc={startGame}/>}
         </div>
