@@ -107,14 +107,13 @@ export const BattleMap:FC<BattleMapProps>=({endGame})=>{
     const [turn,setTurn]=useState(-1);
     return (
         <div className={st.BattleMap}>
-            <button disabled={disabled} onClick={endTurn}>End turn</button>
             
-        <h1>Супер пупер игра</h1>
         <div>
         <UnitsMap currentTurn={turn} units={units} UnitClickHandler={unitClickHandler}/>
         <HexMap hexesForUnit={hexesForUnit} onHexClick={hexClickHandler} />
         </div>
         {selectedUnits[0].x!== -5&&<AttackMenu units={selectedUnits} handleCLick={handleAttackClick}/>}
+        <button disabled={disabled} onClick={endTurn}>End turn</button>
         </div>
     )
 }
