@@ -1,0 +1,14 @@
+.MySelect select,
+.MySelect option {
+  font-family: "Bellefair";
+  font-size: 30px;
+  background-color: #7fa9e2;
+  border: none;
+  padding:1rem 2rem;
+  border-radius: 2px;
+}
+
+.MySelect option:hover {
+  background-color: #6a8fc3;
+  transition: 0.5s;
+}

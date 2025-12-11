@@ -1,14 +1,18 @@
 .PlayerSelectionMenu {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
+  align-items: center;
   height: 100vh;
+  box-sizing: border-box;
   background-color: black;
+  padding: 7.5rem 0rem;
 }
 .PlayerSelectionMenu > div {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  gap: 30rem;
 }
 .RightColumn {
   z-index: 1;

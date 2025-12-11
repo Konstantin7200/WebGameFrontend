@@ -1,7 +1,8 @@
 import { FC, useState } from "react"
 import st from './PlayerSelectionMenu.module.css'
-import { API } from "../../API/API"
 import { GameService } from "../../API/GameService"
+import { MyButton } from "../../UI/MyButton/MyButton"
+import { MySelect } from "../../UI/MySellect/MySellect"
 
 interface PlayerSelectionMenuProps{
     onClickFunc:()=>void
@@ -21,21 +22,21 @@ export const PlayerSelectionMenu:FC<PlayerSelectionMenuProps>=({onClickFunc})=>{
         newSides[index]=value;
         setPlayerTypes(newSides);
     }
+    const buttonStyle={
+        position:'absolute',
+        bottom:'10rem'
+    }
     const [playerTypes,setPlayerTypes]=useState(["Player","Player"]);
     return (
-    <div className={st.PlayerSelectionMenu}>
+        <>
         <div className={st.RightColumn}></div>  
         <div className={st.LeftColumn}></div>
+    <div className={st.PlayerSelectionMenu}> 
         <div>
-        <select value={playerTypes[0]} onChange={(e)=>onSelect(0,e.target.value)}>
-            <option>Player</option>
-            <option>AI</option>
-        </select>
-        <select value={playerTypes[1]} onChange={(e)=>onSelect(1,e.target.value)}>
-            <option>Player</option>
-            <option>AI</option>
-        </select>
+        <MySelect onSelectFunc={onSelect} index={0} options={["Player","AI"]}/>
+        <MySelect onSelectFunc={onSelect} index={1} options={["Player","AI"]}/>
         </div>
-        <button onClick={clickHandler}>Ready</button>
-    </div>)
+        <MyButton onClick={clickHandler} text="Ready"/>
+    </div>
+    </>)
 }

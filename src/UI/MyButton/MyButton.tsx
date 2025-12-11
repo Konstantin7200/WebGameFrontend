@@ -1,16 +1,16 @@
 import { FC } from "react";
-import { text } from "stream/consumers";
 import st from "./MyButton.module.css"
 
 interface MyButtonProps{
     onClick:any,
-    disabled:boolean,
-    text:string
+    disabled?:boolean,
+    text:string,
+    style?:any
 }
 
-export const MyButton:FC<MyButtonProps>=({onClick,disabled,text})=>{
+export const MyButton:FC<MyButtonProps>=({onClick,disabled=false,text,style})=>{
     return(
-        <button onClick={onClick} className={st.MyButton} disabled={disabled}>
+        <button onClick={onClick} style={style} className={st.MyButton} disabled={disabled}>
             {text}
         </button>
     )

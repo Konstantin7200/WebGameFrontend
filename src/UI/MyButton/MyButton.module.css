@@ -1,13 +1,12 @@
 .MyButton {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 10%;
-  left: 0;
+  width:fit-content;
   font-size: 2rem;
   color: black;
   background-color: #7fa9e2;
   border: none;
+  padding:1rem 2rem;
+  font-family: "Bellefair";
+  border-radius: 2px;
 }
 
 .MyButton:hover {
@@ -35,6 +34,7 @@
   }
   50%{
     font-size: 2.1rem;
+    padding: 0.95rem 2rem;
   }
   100%{
     font-size: 2rem;
