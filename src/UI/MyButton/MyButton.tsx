@@ -1,5 +1,6 @@
 import { FC } from "react";
 import st from "./MyButton.module.css"
+import { AudioPlayer } from "../../UtilityFunctions/AudioPlayer";
 
 interface MyButtonProps{
     onClick:any,
@@ -10,7 +11,7 @@ interface MyButtonProps{
 
 export const MyButton:FC<MyButtonProps>=({onClick,disabled=false,text,style})=>{
     return(
-        <button onClick={onClick} style={style} className={st.MyButton} disabled={disabled}>
+        <button onClick={()=>{AudioPlayer.playClick();onClick()}} style={style} className={st.MyButton} disabled={disabled}>
             {text}
         </button>
     )

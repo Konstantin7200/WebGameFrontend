@@ -7,7 +7,7 @@ import { UnitService } from "../../API/UnitsService";
 import { GameService } from "../../API/GameService";
 import { UnitType } from "../../types";
 import { MyButton } from "../../UI/MyButton/MyButton";
-
+import { AudioPlayer } from "../../UtilityFunctions/AudioPlayer";
 interface BattleMapProps{
     endGame:any,
 }
@@ -68,6 +68,7 @@ export const BattleMap:FC<BattleMapProps>=({endGame})=>{
     }
 
     const handleAttackClick=async (attack1:any,attack2:any)=>{
+        AudioPlayer.playFightingSounds();
         await UnitService.fight(attack1.props.attack,attack2.props.attack,selectedUnits)
         loadUnits();
         checkIfLeadersAreDead();
