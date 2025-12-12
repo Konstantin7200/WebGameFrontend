@@ -20,5 +20,8 @@ export const API={
         
         endTurn:`${BASEGAME}EndTurn` as const,
         makeAIMove:`${BASEGAME}AIMove` as const,
+        LoadGame:(index:number)=>`${BASEGAME}LoadGame/?index=${index}` as const,
+        SaveGame:`${BASEGAME}SaveGame` as const,
+        GetGames:`${BASEGAME}GetGames` as const,
     }
 }as const

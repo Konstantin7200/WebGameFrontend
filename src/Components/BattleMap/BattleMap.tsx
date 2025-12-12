@@ -91,7 +91,7 @@ export const BattleMap:FC<BattleMapProps>=({endGame})=>{
         for(let i=0;i<5;i++)
         {
             const result=await loadUnits();
-            if(result?.length!=0)
+            if(result?.length!==0)
                 break;
             await new Promise(resolve=>setTimeout(resolve,delay))
             delay*=2;
@@ -101,14 +101,18 @@ export const BattleMap:FC<BattleMapProps>=({endGame})=>{
     useEffect(()=>{
     start();
     },[])
+    const saveAndQuit=async()=>{
+        await GameService.saveGame();
+        endGame();
+    }
     const defaultUnit:UnitType={x:-5,y:1,health:0,baseUnit:{health:0,type:"",resistances:new Map,attacks:[]},side:0};
     const [selectedUnits,setSelectedUnits]=useState([defaultUnit,defaultUnit])
     const [units,setUnits]=useState([]);
     const [hexesForUnit,setHexesForUnit]=useState(null);
     const [disabled,setDisabled]=useState(false);
     const [turn,setTurn]=useState(0);
-    let currentSide=(turn-1)%2==0?"Left":"Right"
-    let currentSideColor=(turn-1)%2==0?"rgb(58, 157, 255)":"rgb(255, 0, 0)"
+    let currentSide=(turn-1)%2===0?"Left":"Right"
+    let currentSideColor=(turn-1)%2===0?"rgb(58, 157, 255)":"rgb(255, 0, 0)"
     const endButtonStyle={
         position:'absolute',
         width:'100%',
@@ -122,6 +126,7 @@ export const BattleMap:FC<BattleMapProps>=({endGame})=>{
             <h1>Turn:{Math.round(turn/2)}</h1>
             <h1 style={{color:currentSideColor}}>{currentSide} sides turn</h1>
             <MyButton style={endButtonStyle} disabled={disabled} onClick={endTurn}  text="End turn"/>
+            <MyButton onClick={saveAndQuit} text="Save and quit"/>
         </div>  
         <div>
         <UnitsMap currentTurn={turn-1} units={units} UnitClickHandler={unitClickHandler}/>
