@@ -25,7 +25,10 @@ export const GameService={
         return data.json()
     },
     saveGame:async()=>{
-        await fetch(API.GAME.SaveGame)
+        await fetch(API.GAME.SaveGame,{method:"POST"})
+    },
+    getTurn:async()=>{
+        const data=await fetch(API.GAME.GetTurn)
+        return data.json()
     }
-    
 }

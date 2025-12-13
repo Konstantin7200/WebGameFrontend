@@ -22,10 +22,6 @@ export const PlayerSelectionMenu:FC<PlayerSelectionMenuProps>=({onClickFunc})=>{
         newSides[index]=value;
         setPlayerTypes(newSides);
     }
-    const buttonStyle={
-        position:'absolute',
-        bottom:'10rem'
-    }
     const [playerTypes,setPlayerTypes]=useState(["Player","Player"]);
     return (
         <>

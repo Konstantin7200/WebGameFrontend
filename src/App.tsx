@@ -20,11 +20,12 @@ const App=()=>{
     const endGame=()=>{
         setInGame(0);
     }
+    const [gameLoaded,setGameLoaded]=useState(false);
     const[inGame,setInGame]=useState(0);
     return(
         <div className="App">
-            {inGame===2&&<Tooltips children={<BattleMap endGame={endGame} key={inGame}/>}/>}
-            {inGame===0&&<MainMenu startGame={loadPlayerSelectionMenu}/>}
+            {inGame===2&&<Tooltips children={<BattleMap gameLoaded={gameLoaded} endGame={endGame} key={inGame}/>}/>}
+            {inGame===0&&<MainMenu loadPlayerSelectionMenu={loadPlayerSelectionMenu} loadGame={()=>{setGameLoaded(true);startGame()}}/>}
             {inGame===1&&<PlayerSelectionMenu onClickFunc={startGame}/>}
         </div>
     )

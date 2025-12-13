@@ -28,3 +28,12 @@ export type AttackType={
     attacksAmount:number,
     damage:number
 }
+export type Game={
+    dateOfCreation:any,
+    playerConfig:PlayerConfig
+    currentTurn:number
+}
+type PlayerConfig={
+    firstSide:number,
+    secondSide:number
+}

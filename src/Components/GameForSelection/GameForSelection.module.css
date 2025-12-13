@@ -1,0 +1,12 @@
+.GameForSelection{
+    background-color: #7db3ff;
+    padding:1rem 2rem;
+    font-family: "Bellefair";
+    border-radius: 2px;
+    font-size: 1.5rem;
+}
+.GameForSelection>div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

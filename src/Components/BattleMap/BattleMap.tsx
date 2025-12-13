@@ -10,9 +10,10 @@ import { MyButton } from "../../UI/MyButton/MyButton";
 import { AudioPlayer } from "../../UtilityFunctions/AudioPlayer";
 interface BattleMapProps{
     endGame:any,
+    gameLoaded:boolean
 }
 
-export const BattleMap:FC<BattleMapProps>=({endGame})=>{
+export const BattleMap:FC<BattleMapProps>=({endGame,gameLoaded})=>{
     let inGame=true;
     const loadUnits=async()=>{
         const loadedUnits=await UnitService.loadUnits();
@@ -96,7 +97,12 @@ export const BattleMap:FC<BattleMapProps>=({endGame})=>{
             await new Promise(resolve=>setTimeout(resolve,delay))
             delay*=2;
         }
+        const turn=await GameService.getTurn();
+        setTurn(turn);
+        alert(turn);
+        if(!gameLoaded)
         await endTurn();
+        alert(turn);
     };
     useEffect(()=>{
     start();
@@ -127,6 +133,7 @@ export const BattleMap:FC<BattleMapProps>=({endGame})=>{
             <h1 style={{color:currentSideColor}}>{currentSide} sides turn</h1>
             <MyButton style={endButtonStyle} disabled={disabled} onClick={endTurn}  text="End turn"/>
             <MyButton onClick={saveAndQuit} text="Save and quit"/>
+            <MyButton onClick={endGame} text="Quit"/>
         </div>  
         <div>
         <UnitsMap currentTurn={turn-1} units={units} UnitClickHandler={unitClickHandler}/>

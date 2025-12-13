@@ -23,5 +23,6 @@ export const API={
         LoadGame:(index:number)=>`${BASEGAME}LoadGame/?index=${index}` as const,
         SaveGame:`${BASEGAME}SaveGame` as const,
         GetGames:`${BASEGAME}GetGames` as const,
+        GetTurn:`${BASEGAME}GetTurn` as const
     }
 }as const
