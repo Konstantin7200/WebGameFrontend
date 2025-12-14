@@ -9,7 +9,6 @@ interface GameProps{
 }
 
 export const GameForSelection:FC<GameProps>=({Game,loadGame,index})=>{
-    console.log(Game);
     let playerNames=["Player","AI"];
     const formatedDate = new Date(Game.dateOfCreation).toLocaleDateString('ru-RU', {
         day: 'numeric',

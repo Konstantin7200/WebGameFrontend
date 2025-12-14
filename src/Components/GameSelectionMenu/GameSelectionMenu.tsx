@@ -16,7 +16,7 @@ export const GameSelectionMenu:FC<GameSelectionMenuProps>=({games,quit,loadGame}
     if(games!==undefined)
     for(let i=0;i<games.length;i++)
     {
-        mas.push(<GameForSelection Game={games[i]} loadGame={loadGame} index={i}/>);
+        mas.push(<GameForSelection key={i} Game={games[i]} loadGame={loadGame} index={i}/>);
     }
     const buttonStyle={
         position:'absolute',

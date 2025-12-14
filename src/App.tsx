@@ -19,6 +19,7 @@ const App=()=>{
     }
     const endGame=()=>{
         setInGame(0);
+        setGameLoaded(false)
     }
     const [gameLoaded,setGameLoaded]=useState(false);
     const[inGame,setInGame]=useState(0);

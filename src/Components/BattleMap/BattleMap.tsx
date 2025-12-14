@@ -8,6 +8,7 @@ import { GameService } from "../../API/GameService";
 import { UnitType } from "../../types";
 import { MyButton } from "../../UI/MyButton/MyButton";
 import { AudioPlayer } from "../../UtilityFunctions/AudioPlayer";
+import { get } from "http";
 interface BattleMapProps{
     endGame:any,
     gameLoaded:boolean
@@ -86,23 +87,28 @@ export const BattleMap:FC<BattleMapProps>=({endGame,gameLoaded})=>{
         }
         
     }
+    const getTurn=async()=>{
+        const turn=await GameService.getTurn();
+        setTurn(turn);
+        return turn;
+    }
     const start=async()=>
     {
+        console.log(Date.now);
         let delay=100;
         for(let i=0;i<5;i++)
         {
+            const loadedTurn=await getTurn();
             const result=await loadUnits();
-            if(result?.length!==0)
+            if(result?.length!==0&&loadedTurn!==undefined)
                 break;
             await new Promise(resolve=>setTimeout(resolve,delay))
             delay*=2;
         }
-        const turn=await GameService.getTurn();
-        setTurn(turn);
-        alert(turn);
+        console.log(Date.now);
         if(!gameLoaded)
         await endTurn();
-        alert(turn);
+        console.log(Date.now);
     };
     useEffect(()=>{
     start();
@@ -127,13 +133,16 @@ export const BattleMap:FC<BattleMapProps>=({endGame,gameLoaded})=>{
     }
     return (
         <div className={st.BattleMap}>
-        <div className={st.RightColumn}></div>  
+        <div className={st.RightColumn}>
+            <div>
+            <MyButton style={{width:'100%'}} onClick={endGame} text="Quit"/>
+            <MyButton style={{width:'100%'}} onClick={saveAndQuit} text="Save and quit"/>
+            </div>
+        </div>  
         <div className={st.LeftColumn}>
             <h1>Turn:{Math.round(turn/2)}</h1>
             <h1 style={{color:currentSideColor}}>{currentSide} sides turn</h1>
             <MyButton style={endButtonStyle} disabled={disabled} onClick={endTurn}  text="End turn"/>
-            <MyButton onClick={saveAndQuit} text="Save and quit"/>
-            <MyButton onClick={endGame} text="Quit"/>
         </div>  
         <div>
         <UnitsMap currentTurn={turn-1} units={units} UnitClickHandler={unitClickHandler}/>
