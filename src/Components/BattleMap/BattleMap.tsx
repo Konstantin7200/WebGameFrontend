@@ -36,6 +36,7 @@ export const BattleMap:FC<BattleMapProps>=({endGame,gameLoaded})=>{
     }
     const endTurn=async()=>{
         setTurn(prev=>prev+1);
+        unitClickHandler(-1,-1);
         if(inGame){
             await GameService.endTurn();
             const nextPlayerIsAi=await GameService.checkIsNextPlayerAI();

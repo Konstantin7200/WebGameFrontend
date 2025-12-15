@@ -26,10 +26,10 @@ export const GameSelectionMenu:FC<GameSelectionMenuProps>=({games,quit,loadGame}
     }
     return(
         <div className={st.GameSelectionMenu}>
-        <div className={st.RightColumn}></div>  
-        <div className={st.LeftColumn}>
+        <div className={st.RightColumn}> 
             <MyButton style={buttonStyle} onClick={quit} text="Back To Menu"/>
-        </div>
+        </div>  
+        <div className={st.LeftColumn}></div>
         {mas}
         </div>
     )
