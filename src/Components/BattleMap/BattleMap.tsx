@@ -47,11 +47,13 @@ export const BattleMap:FC<BattleMapProps>=({endGame,gameLoaded})=>{
     }
     const makeAIMove=async ()=>{
         setDisabled(true);
-        let result=true;
-        while(result&&inGame)
+        let result={hasTurnHappened:true,hasFighted:false}
+        while(result.hasTurnHappened&&inGame)
         {
         await new Promise(resolve=>setTimeout(resolve,500));
         result=await GameService.makeAIMove();
+        if(result.hasFighted)
+            AudioPlayer.playFightingSounds();
         await loadUnits(); 
         checkIfLeadersAreDead();
         }
@@ -95,7 +97,6 @@ export const BattleMap:FC<BattleMapProps>=({endGame,gameLoaded})=>{
     }
     const start=async()=>
     {
-        console.log(Date.now);
         let delay=100;
         for(let i=0;i<5;i++)
         {
@@ -106,10 +107,8 @@ export const BattleMap:FC<BattleMapProps>=({endGame,gameLoaded})=>{
             await new Promise(resolve=>setTimeout(resolve,delay))
             delay*=2;
         }
-        console.log(Date.now);
         if(!gameLoaded)
         await endTurn();
-        console.log(Date.now);
     };
     useEffect(()=>{
     start();
