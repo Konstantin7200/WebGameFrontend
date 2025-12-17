@@ -1,5 +1,5 @@
 import { Tooltip } from "react-tooltip"
-import { HexType } from "../../types"
+import { HexType } from "../../../../../types"
 import st from "./Hex.module.css"
 import {FC} from "react"
 
@@ -27,9 +27,9 @@ const Hex:FC<HexProps>=({size,centerX,centerY,onHexClick,hex})=>{
     if(hex.isForUnit)
     {
         tooltipId="hexToMove"
-        if(hex.movesToReach==1)
+        if(hex.movesToReach===1)
         hexColor='#007f08ff'
-        else if(hex.movesToReach==2)
+        else if(hex.movesToReach===2)
             hexColor='#00a30bdf'
         else hexColor='#00bc0dff'
     }

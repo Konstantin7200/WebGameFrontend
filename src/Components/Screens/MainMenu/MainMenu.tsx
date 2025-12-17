@@ -1,9 +1,10 @@
 import { FC, useState } from "react";
 import st from "./MainMenu.module.css"
-import { MyButton } from "../../UI/MyButton/MyButton";
-import { GameService } from "../../API/GameService";
+import { MyButton } from "../../../UI/MyButton/MyButton";
+import { GameService } from "../../../API/GameService";
 import { GameSelectionMenu } from "../GameSelectionMenu/GameSelectionMenu";
 import { Rules } from "../Rules/Rules";
+import { Column } from "../../../UI/Column/Column";
 
 
 interface MainMenuProps{
@@ -21,8 +22,8 @@ export const MainMenu:FC<MainMenuProps>=({loadPlayerSelectionMenu,loadGame})=>{
     return (
         <>
     {!rulesVisible&&games===null&&<div className={st.MainMenu}>
-        <div className={st.RightColumn}></div>  
-        <div className={st.LeftColumn}></div>
+        <Column orientation="Right"/>
+        <Column orientation="Left"/>
         <div>
             <img src="logo.png" alt="" />
         <h1>Battle of 6 nations</h1>

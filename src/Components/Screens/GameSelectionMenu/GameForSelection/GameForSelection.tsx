@@ -1,7 +1,7 @@
 import { FC } from "react";
 import st from "./GameForSelection.module.css"
-import { Game } from "../../types";
-import { MyButton } from "../../UI/MyButton/MyButton";
+import { Game } from "../../../../types";
+import { MyButton } from "../../../../UI/MyButton/MyButton";
 interface GameProps{
     Game:Game,
     loadGame:any,

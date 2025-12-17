@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
 import "./App.css"
-import { BattleMap } from "./Components/BattleMap/BattleMap"
-import { MainMenu } from "./Components/MainMenu/MainMenu";
-import { PlayerSelectionMenu } from "./Components/PlayerSelectionMenu/PlayerSelectionMenu";
+import { BattleMap } from "./Components/Screens/BattleMap/BattleMap"
+import { MainMenu } from "./Components/Screens/MainMenu/MainMenu";
+import { PlayerSelectionMenu } from "./Components/Screens/PlayerSelectionMenu/PlayerSelectionMenu";
 import { Tooltips } from "./Components/Tooltips/Tooltips";
 import { AudioPlayer } from "./UtilityFunctions/AudioPlayer";
 

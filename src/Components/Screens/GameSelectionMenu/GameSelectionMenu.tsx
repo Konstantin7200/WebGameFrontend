@@ -1,8 +1,9 @@
 import { FC } from "react"
 import st from "./GameSelectionMenu.module.css"
-import { GameForSelection } from "../GameForSelection/GameForSelection"
-import { Game } from "../../types"
-import { MyButton } from "../../UI/MyButton/MyButton"
+import { GameForSelection } from "./GameForSelection/GameForSelection"
+import { Game } from "../../../types"
+import { MyButton } from "../../../UI/MyButton/MyButton"
+import { Column } from "../../../UI/Column/Column"
 
 
 interface GameSelectionMenuProps{
@@ -26,10 +27,10 @@ export const GameSelectionMenu:FC<GameSelectionMenuProps>=({games,quit,loadGame}
     }
     return(
         <div className={st.GameSelectionMenu}>
-        <div className={st.RightColumn}> 
+        <Column orientation="Right">
             <MyButton style={buttonStyle} onClick={quit} text="Back To Menu"/>
-        </div>  
-        <div className={st.LeftColumn}></div>
+        </Column>
+        <Column orientation="Left"/>
         {mas}
         </div>
     )

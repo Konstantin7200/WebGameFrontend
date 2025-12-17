@@ -1,14 +1,15 @@
-import HexMap from "../../Components/HexMap/HexMap"
+import HexMap from "./HexMap/HexMap"
 import st from "./BattleMap.module.css"
 import { FC, useEffect, useState } from "react";
-import { UnitsMap } from "../../Components/UnitsMap/UnitsMap";
-import { AttackMenu } from "../../Components/AttackMenu/AttackMenu";
-import { UnitService } from "../../API/UnitsService";
-import { GameService } from "../../API/GameService";
-import { UnitType } from "../../types";
-import { MyButton } from "../../UI/MyButton/MyButton";
-import { AudioPlayer } from "../../UtilityFunctions/AudioPlayer";
+import { UnitsMap } from "./UnitsMap/UnitsMap";
+import { AttackMenu } from "./AttackMenu/AttackMenu";
+import { UnitService } from "../../../API/UnitsService";
+import { GameService } from "../../../API/GameService";
+import { UnitType } from "../../../types";
+import { MyButton } from "../../../UI/MyButton/MyButton";
+import { AudioPlayer } from "../../../UtilityFunctions/AudioPlayer";
 import { get } from "http";
+import { Column } from "../../../UI/Column/Column";
 interface BattleMapProps{
     endGame:any,
     gameLoaded:boolean
@@ -133,17 +134,17 @@ export const BattleMap:FC<BattleMapProps>=({endGame,gameLoaded})=>{
     }
     return (
         <div className={st.BattleMap}>
-        <div className={st.RightColumn}>
-            <div>
+         <Column orientation="Right">
+            <div className={st.RightButtonsCont}>
             <MyButton style={{width:'100%'}} onClick={endGame} text="Quit"/>
             <MyButton style={{width:'100%'}} onClick={saveAndQuit} text="Save and quit"/>
             </div>
-        </div>  
-        <div className={st.LeftColumn}>
+        </Column> 
+        <Column orientation="Left">
             <h1>Turn:{Math.round(turn/2)}</h1>
             <h1 style={{color:currentSideColor}}>{currentSide} sides turn</h1>
             <MyButton style={endButtonStyle} disabled={disabled} onClick={endTurn}  text="End turn"/>
-        </div>  
+        </Column>
         <div>
         <UnitsMap currentTurn={turn-1} units={units} UnitClickHandler={unitClickHandler}/>
         <HexMap hexesForUnit={hexesForUnit} onHexClick={hexClickHandler} />

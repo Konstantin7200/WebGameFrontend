@@ -1,7 +1,7 @@
 import {FC} from 'react'
-import Hex from '../Hex/Hex'
+import Hex from './Hex/Hex'
 import st from "./HexMap.module.css"
-import { HexType } from '../../types'
+import { HexType } from '../../../../types'
 
 interface HexMapProps{
     size?:number,

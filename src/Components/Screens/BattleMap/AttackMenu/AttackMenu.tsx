@@ -1,8 +1,8 @@
 import {FC} from 'react'
-import { Attack } from '../Attack/Attack'
+import { Attack } from './Attack/Attack'
 import st from "./AttackMenu.module.css"
-import { Unit } from '../Unit/Unit'
-import { AttackType, UnitType } from '../../types'
+import { Unit } from '../../../Unit/Unit'
+import { AttackType, UnitType } from '../../../../types'
 
 interface AttackMenuProps{
     handleCLick:(attack1:any,attack2:any)=>void,

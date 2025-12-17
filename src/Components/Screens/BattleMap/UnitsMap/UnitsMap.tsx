@@ -1,7 +1,7 @@
 import {FC} from "react"
-import { Unit } from "../Unit/Unit";
+import { Unit } from "../../../Unit/Unit";
 import st from "./UnitsMap.module.css"
-import { UnitType } from "../../types";
+import { UnitType } from "../../../../types";
 
 interface UnitsMapProps{
     size?:number,

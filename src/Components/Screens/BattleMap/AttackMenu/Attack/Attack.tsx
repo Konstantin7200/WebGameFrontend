@@ -1,12 +1,12 @@
 import { FC } from "react";
 import st from "./Attack.module.css"
-import Arcane from "../../Assets/WeaponIcons/Arcane.png" 
-import SlashMelee from "../../Assets/WeaponIcons/Slash.png"
-import SmashMelee from "../../Assets/WeaponIcons/Smash.png"
-import Fire from "../../Assets/WeaponIcons/Fire.png"
-import PierceMelee from "../../Assets/WeaponIcons/Pierce.png"
-import RangedPierce from "../../Assets/WeaponIcons/PierceRanged.png"
-import { AttackType } from "../../types";
+import Arcane from "../../../../../Assets/WeaponIcons/Arcane.png" 
+import SlashMelee from "../../../../../Assets/WeaponIcons/Slash.png"
+import SmashMelee from "../../../../../Assets/WeaponIcons/Smash.png"
+import Fire from "../../../../../Assets/WeaponIcons/Fire.png"
+import PierceMelee from "../../../../../Assets/WeaponIcons/Pierce.png"
+import RangedPierce from "../../../../../Assets/WeaponIcons/PierceRanged.png"
+import { AttackType } from "../../../../../types";
 
 
 interface AttackProps{
