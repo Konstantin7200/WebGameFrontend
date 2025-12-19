@@ -1,11 +1,23 @@
 import { API } from "./API";
 
-
+async function polling(call:any){
+    let delay=100;
+    for(let i=0;i<5;i++)
+    {
+        const result=await call();
+        if(result)
+        {
+            return result;
+        }
+        await new Promise(resolve=>setTimeout(resolve,delay))
+        delay*=2;
+    }
+}
 
 export const UnitService={
     loadUnits:async()=>{
-        const data=await fetch(API.UNITS.getUnits)
-        return await data.json();
+        const response=await polling(()=>fetch(API.UNITS.getUnits))
+        return await response.json();
     },
     getAvailableMovesForUnit:async(x:number,y:number)=>{
         const data=await fetch(API.UNITS.getAvailableMovesForUnit(x,y))

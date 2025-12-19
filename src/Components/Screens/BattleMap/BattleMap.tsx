@@ -8,7 +8,6 @@ import { GameService } from "../../../API/GameService";
 import { UnitType } from "../../../types";
 import { MyButton } from "../../../UI/MyButton/MyButton";
 import { AudioPlayer } from "../../../UtilityFunctions/AudioPlayer";
-import { get } from "http";
 import { Column } from "../../../UI/Column/Column";
 interface BattleMapProps{
     endGame:any,
@@ -98,16 +97,8 @@ export const BattleMap:FC<BattleMapProps>=({endGame,gameLoaded})=>{
     }
     const start=async()=>
     {
-        let delay=100;
-        for(let i=0;i<5;i++)
-        {
-            const loadedTurn=await getTurn();
-            const result=await loadUnits();
-            if(result?.length!==0&&loadedTurn!==undefined)
-                break;
-            await new Promise(resolve=>setTimeout(resolve,delay))
-            delay*=2;
-        }
+        await loadUnits();
+        await getTurn();
         if(!gameLoaded)
         await endTurn();
     };
