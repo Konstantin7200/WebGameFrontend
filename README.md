@@ -4,8 +4,6 @@
 Frontend for a turn-based tactical game (Battle Of 6 Nations).  
 React + TypeScript, API integration, polling, custom UI components.
 
-> Frontend client only. Backend not connected — architecture demo.
-
 ## Tech Details
 
 **Architecture:**
